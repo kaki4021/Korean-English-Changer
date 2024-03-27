@@ -142,11 +142,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClipboardManager.cpp" />
+    <ClCompile Include="KoreanDecompositionManager.cpp" />
     <ClCompile Include="KoreanMergeManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClipboardManager.h" />
+    <ClInclude Include="KoreanDecompositionManager.h" />
     <ClInclude Include="KoreanMergeManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
