@@ -1,21 +1,21 @@
 #include "KoreanMergeManager.h"
 
-std::unordered_map<std::string, char> KoreanMergeManager::first = { {"r", 0}, {"R", 1}, {"s", 2}, {"S", 2}, {"e", 3}, {"E", 4}, {"f", 5}, {"F", 5}, {"a", 6}, {"A", 6}, {"q", 7}, {"Q", 8}, {"t", 9}, {"T", 10}, {"d", 11}, {"D", 11}, {"w", 12}, {"W", 13}, {"c", 14}, {"C", 14}, {"z", 15}, {"Z", 15}, {"x", 16}, {"X", 16}, {"v", 17}, {"V", 17}, {"g", 18}, {"G", 18} };
-std::unordered_map<std::string, char> KoreanMergeManager::middle = { {"k", 0}, {"K", 0}, {"o", 1}, {"i", 2}, {"I", 2}, {"O", 3}, {"j", 4}, {"J", 4}, {"p", 5}, {"u", 6}, {"U", 6}, {"P", 7}, {"h", 8}, {"H", 8}, {"hk", 9}, {"hK", 9}, {"Hk", 9}, {"HK", 9}, {"ho", 10}, {"Ho", 10}, {"hl", 11}, {"hL", 11}, {"Hl", 11}, {"HL", 11}, {"y", 12}, {"Y", 12}, {"n", 13}, {"N", 13}, {"nj", 14}, {"nJ", 14}, {"Nj", 14}, {"NJ", 14}, {"np", 15}, {"Np", 15}, {"nl", 16}, {"nL", 16}, {"Nl", 16}, {"NL", 16}, {"b", 17}, {"B", 17}, {"m", 18}, {"M", 18}, {"ml", 19}, {"mL", 19}, {"Ml", 19}, {"ML", 19}, {"l", 20}, {"L", 20} };
-std::unordered_map<std::string, char> KoreanMergeManager::last = { {"r", 1}, {"R", 2}, {"rt", 3}, {"s", 4}, {"S", 4}, {"sw", 5}, {"Sw", 5}, {"sg", 6}, {"sG", 6}, {"Sg", 6}, {"SG", 6}, {"e", 7}, {"f", 8}, {"F", 8}, {"fr", 9}, {"Fr", 9}, {"fa", 10}, {"fA", 10}, {"Fa", 10}, {"FA", 10}, {"ft", 11}, {"Ft", 11}, {"fq", 12}, {"Fq", 12}, {"fx", 13}, {"fX", 13}, {"Fx", 13}, {"FX", 13}, {"fv", 14}, {"fV", 14}, {"Fv", 14}, {"FV", 14}, {"fg", 15}, {"fG", 15}, {"Fg", 15}, {"FG", 15}, {"a", 16}, {"A", 16}, {"q", 17}, {"qt", 18}, {"t", 19}, {"T", 20}, {"d", 21}, {"D", 21}, {"w", 22}, {"W", 22}, {"c", 23}, {"C", 23}, {"z", 24}, {"Z", 24}, {"x", 25}, {"X", 25}, {"v", 26}, {"V", 26}, {"g", 27}, {"G", 27} };
-std::unordered_map<std::string, char> KoreanMergeManager::single_consonants = { {"r", 0}, {"R", 1}, {"rt", 2}, {"s", 3}, {"S", 3}, {"sw", 4}, {"Sw", 4}, {"sg", 5}, {"sG", 5}, {"Sg", 5}, {"SG", 5}, {"e", 6}, {"E", 7}, {"f", 8}, {"F", 8}, {"fr", 9}, {"Fr", 9}, {"fa", 10}, {"fA", 10}, {"Fa", 10}, {"FA", 10}, {"fq", 11}, {"Fq", 11}, {"ft", 12}, {"Ft", 12}, {"fx", 13}, {"fX", 13}, {"Fx", 13}, {"FX", 13}, {"fv", 14}, {"fV", 14}, {"Fv", 14}, {"FV", 14}, {"fg", 15}, {"fG", 15}, {"Fg", 15}, {"FG", 15}, {"a", 16}, { "A", 16 }, {"q", 17}, {"Q", 18}, { "qt", 19 }, {"t", 20}, {"T", 21}, {"d", 22}, {"D", 22}, {"w", 23}, {"W", 24}, {"c", 25}, {"C", 25}, {"z", 26}, {"Z", 26}, {"x", 27}, {"X", 27}, {"v", 28}, {"V", 28}, {"g", 29}, {"G", 29}};
+std::unordered_map<std::wstring, wchar_t> KoreanMergeManager::first = { {L"r", 0}, {L"R", 1}, {L"s", 2}, {L"S", 2}, {L"e", 3}, {L"E", 4}, {L"f", 5}, {L"F", 5}, {L"a", 6}, {L"A", 6}, {L"q", 7}, {L"Q", 8}, {L"t", 9}, {L"T", 10}, {L"d", 11}, {L"D", 11}, {L"w", 12}, {L"W", 13}, {L"c", 14}, {L"C", 14}, {L"z", 15}, {L"Z", 15}, {L"x", 16}, {L"X", 16}, {L"v", 17}, {L"V", 17}, {L"g", 18}, {L"G", 18} };
+std::unordered_map<std::wstring, wchar_t> KoreanMergeManager::middle = { {L"k", 0}, {L"K", 0}, {L"o", 1}, {L"i", 2}, {L"I", 2}, {L"O", 3}, {L"j", 4}, {L"J", 4}, {L"p", 5}, {L"u", 6}, {L"U", 6}, {L"P", 7}, {L"h", 8}, {L"H", 8}, {L"hk", 9}, {L"hK", 9}, {L"Hk", 9}, {L"HK", 9}, {L"ho", 10}, {L"Ho", 10}, {L"hl", 11}, {L"hL", 11}, {L"Hl", 11}, {L"HL", 11}, {L"y", 12}, {L"Y", 12}, {L"n", 13}, {L"N", 13}, {L"nj", 14}, {L"nJ", 14}, {L"Nj", 14}, {L"NJ", 14}, {L"np", 15}, {L"Np", 15}, {L"nl", 16}, {L"nL", 16}, {L"Nl", 16}, {L"NL", 16}, {L"b", 17}, {L"B", 17}, {L"m", 18}, {L"M", 18}, {L"ml", 19}, {L"mL", 19}, {L"Ml", 19}, {L"ML", 19}, {L"l", 20}, {L"L", 20} };
+std::unordered_map<std::wstring, wchar_t> KoreanMergeManager::last = { {L"r", 1}, {L"R", 2}, {L"rt", 3}, {L"s", 4}, {L"S", 4}, {L"sw", 5}, {L"Sw", 5}, {L"sg", 6}, {L"sG", 6}, {L"Sg", 6}, {L"SG", 6}, {L"e", 7}, {L"f", 8}, {L"F", 8}, {L"fr", 9}, {L"Fr", 9}, {L"fa", 10}, {L"fA", 10}, {L"Fa", 10}, {L"FA", 10}, {L"ft", 11}, {L"Ft", 11}, {L"fq", 12}, {L"Fq", 12}, {L"fx", 13}, {L"fX", 13}, {L"Fx", 13}, {L"FX", 13}, {L"fv", 14}, {L"fV", 14}, {L"Fv", 14}, {L"FV", 14}, {L"fg", 15}, {L"fG", 15}, {L"Fg", 15}, {L"FG", 15}, {L"a", 16}, {L"A", 16}, {L"q", 17}, {L"qt", 18}, {L"t", 19}, {L"T", 20}, {L"d", 21}, {L"D", 21}, {L"w", 22}, {L"W", 22}, {L"c", 23}, {L"C", 23}, {L"z", 24}, {L"Z", 24}, {L"x", 25}, {L"X", 25}, {L"v", 26}, {L"V", 26}, {L"g", 27}, {L"G", 27} };
+std::unordered_map<std::wstring, wchar_t> KoreanMergeManager::single_consonants = { {L"r", 0}, {L"R", 1}, {L"rt", 2}, {L"s", 3}, {L"S", 3}, {L"sw", 4}, {L"Sw", 4}, {L"sg", 5}, {L"sG", 5}, {L"Sg", 5}, {L"SG", 5}, {L"e", 6}, {L"E", 7}, {L"f", 8}, {L"F", 8}, {L"fr", 9}, {L"Fr", 9}, {L"fa", 10}, {L"fA", 10}, {L"Fa", 10}, {L"FA", 10}, {L"fq", 11}, {L"Fq", 11}, {L"ft", 12}, {L"Ft", 12}, {L"fx", 13}, {L"fX", 13}, {L"Fx", 13}, {L"FX", 13}, {L"fv", 14}, {L"fV", 14}, {L"Fv", 14}, {L"FV", 14}, {L"fg", 15}, {L"fG", 15}, {L"Fg", 15}, {L"FG", 15}, {L"a", 16}, {L"A", 16 }, {L"q", 17}, {L"Q", 18}, {L"qt", 19 }, {L"t", 20}, {L"T", 21}, {L"d", 22}, {L"D", 22}, {L"w", 23}, {L"W", 24}, {L"c", 25}, {L"C", 25}, {L"z", 26}, {L"Z", 26}, {L"x", 27}, {L"X", 27}, {L"v", 28}, {L"V", 28}, {L"g", 29}, {L"G", 29}};
 
-int KoreanMergeManager::ConsonantVowelConsonantMerge(char m_first, char m_middle, char m_last)
+int KoreanMergeManager::ConsonantVowelConsonantMerge(const wchar_t m_first, const wchar_t m_middle, const wchar_t m_last)
 {
 	return 0xAC00 + (588 * m_first) + (28 * m_middle) + (m_last);
 }
 
-wchar_t* KoreanMergeManager::KoreanMerge(const char* p_english_text)
+wchar_t* KoreanMergeManager::KoreanMerge(const wchar_t* p_english_text)
 {
 	std::vector<int> v_korean_text;
 
-	std::string s_english_text = p_english_text;
-	s_english_text += "000000";
+	std::wstring s_english_text = p_english_text;
+	s_english_text += L"000000";
 
 	size_t reading_pos = 0;
 	size_t s_english_text_len = s_english_text.length() - 6;
@@ -36,8 +36,8 @@ wchar_t* KoreanMergeManager::KoreanMerge(const char* p_english_text)
 			continue;
 		}
 		
-		std::string substr1 = s_english_text.substr(reading_pos, 1);
-		std::string substr2 = s_english_text.substr(reading_pos, 2);
+		std::wstring substr1 = s_english_text.substr(reading_pos, 1);
+		std::wstring substr2 = s_english_text.substr(reading_pos, 2);
 		first_letter_num = 50;
 		if (first.find(substr1) != first.end())
 		{
