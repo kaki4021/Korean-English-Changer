@@ -60,7 +60,7 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 {
 	//중복 실행 방지
 	HANDLE Mutex;
-	const wchar_t ProgMutex[] = L"Korean English Changer";
+	const wchar_t ProgMutex[] = L"KoreanEnglishChanger";
 	if ((Mutex = OpenMutex(MUTEX_ALL_ACCESS, false, ProgMutex)) == NULL)
 		Mutex = CreateMutex(NULL, true, ProgMutex);
 	else {
@@ -74,13 +74,13 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 
 
 	//시작 프로그램 등록
-	wchar_t exePath[MAX_PATH];
+	wchar_t exePath[MAX_PATH] = { 0, };
 	GetModuleFileName(NULL, exePath, MAX_PATH);
 
 	HKEY hKey;
 	if (RegOpenKeyEx(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_WRITE, &hKey) == ERROR_SUCCESS) {
 
-		if (RegSetValueEx(hKey, L"Korean English Changer", 0, REG_SZ, (BYTE*)exePath, (DWORD)(wcslen(exePath) + 1) * sizeof(char)) != ERROR_SUCCESS) {
+		if (RegSetValueEx(hKey, L"KoreanEnglishChanger", 0, REG_SZ, (BYTE*)exePath, (DWORD)(wcslen(exePath) + 1) * sizeof(wchar_t)) != ERROR_SUCCESS) {
 			MessageBox(NULL, L"Registry value setting failed", L"ERROR", MB_OK);
 		}
 
