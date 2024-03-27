@@ -71,10 +71,10 @@ char* ClipboardManager::Wchar2Char(const wchar_t* p_wchar_string)
 wchar_t* ClipboardManager::Char2Wchar(const char* p_char_string)
 {
 	size_t converted_wchars = 0;
-	size_t nLen = strlen(p_char_string) + 1;
+	size_t str_param_len = strlen(p_char_string) + 1;
 
-	wchar_t* p_wchar_string = (LPWSTR)malloc(sizeof(wchar_t) * nLen);
-	mbstowcs_s(&converted_wchars, p_wchar_string, nLen, p_char_string, nLen);
+	wchar_t* p_wchar_string = new wchar_t[str_param_len];
+	mbstowcs_s(&converted_wchars, p_wchar_string, str_param_len, p_char_string, str_param_len);
 
 	return p_wchar_string;
 }
