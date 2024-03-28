@@ -84,7 +84,10 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 					clipboard_text = ClipboardManager::GetClipboardText();
 				}
 				if (i >= 100)
+				{
+					delete[] clipboard_text;
 					continue;
+				}
 
 				if (!English2Korean(clipboard_text))
 					continue;
@@ -115,7 +118,10 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 					clipboard_text = ClipboardManager::GetClipboardText();
 				}
 				if (i >= 100)
+				{
+					delete[] clipboard_text;
 					continue;
+				}
 
 				if (!Korean2English(clipboard_text))
 					continue;
