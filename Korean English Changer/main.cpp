@@ -64,7 +64,7 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 	if ((Mutex = OpenMutex(MUTEX_ALL_ACCESS, false, ProgMutex)) == NULL)
 		Mutex = CreateMutex(NULL, true, ProgMutex);
 	else {
-		MessageBox(NULL, L"이미 실행중입니다.", L"알림", MB_OK);
+		MessageBox(NULL, L"Already running.", L"NOTICE", MB_OK);
 		return 0;
 	}
 
