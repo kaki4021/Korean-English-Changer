@@ -58,24 +58,22 @@ void ExecuteCtrlV()
 int WINAPI
 WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 {
-	//Áßº¹ ½ÇÇà ¹æÁö
-	{
-		HANDLE Mutex;
-		const wchar_t ProgMutex[] = L"KoreanEnglishChanger";
-		if ((Mutex = OpenMutex(MUTEX_ALL_ACCESS, false, ProgMutex)) == NULL)
-			Mutex = CreateMutex(NULL, true, ProgMutex);
-		else {
-			MessageBox(NULL, L"ÀÌ¹Ì ½ÇÇàÁßÀÔ´Ï´Ù.", L"¾Ë¸²", MB_OK);
-			return 0;
-		}
+	//ì¤‘ë³µ ì‹¤í–‰ ë°©ì§€
+	HANDLE Mutex;
+	const wchar_t ProgMutex[] = L"KoreanEnglishChanger";
+	if ((Mutex = OpenMutex(MUTEX_ALL_ACCESS, false, ProgMutex)) == NULL)
+		Mutex = CreateMutex(NULL, true, ProgMutex);
+	else {
+		MessageBox(NULL, L"ì´ë¯¸ ì‹¤í–‰ì¤‘ì…ë‹ˆë‹¤.", L"ì•Œë¦¼", MB_OK);
+		return 0;
 	}
 
 
-	//ÇÑ±Û ¼³Á¤(char <-> wchar_t º¯È¯¿¡ ÇÊ¿äÇÔ)
+	//í•œê¸€ ì„¤ì •(char <-> wchar_t ë³€í™˜ì— í•„ìš”í•¨)
 	setlocale(LC_ALL, "korean");
 
 
-	//½ÃÀÛ ÇÁ·Î±×·¥ µî·Ï
+	//ì‹œì‘ í”„ë¡œê·¸ë¨ ë“±ë¡
 	{
 		wchar_t exePath[MAX_PATH] = { 0 };
 		GetModuleFileName(NULL, exePath, MAX_PATH);
@@ -96,20 +94,20 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 	}
 
 
-	//´ÜÃàÅ° µî·Ï
-	RegisterHotKey(NULL, 1, MOD_CONTROL | MOD_NOREPEAT, 0x15); //Ctrl + ÇÑ/¿µ
-	RegisterHotKey(NULL, 2, MOD_CONTROL | MOD_ALT | MOD_NOREPEAT, 0x15); //Ctrl + Alt + ÇÑ/¿µ
-	RegisterHotKey(NULL, 3, MOD_SHIFT | MOD_NOREPEAT, 0x15); //Shift + ÇÑ/¿µ
-	RegisterHotKey(NULL, 4, MOD_SHIFT | MOD_ALT | MOD_NOREPEAT, 0x15); //Shift + Alt + ÇÑ/¿µ
+	//ë‹¨ì¶•í‚¤ ë“±ë¡
+	RegisterHotKey(NULL, 1, MOD_CONTROL | MOD_NOREPEAT, 0x15); //Ctrl + í•œ/ì˜
+	RegisterHotKey(NULL, 2, MOD_CONTROL | MOD_ALT | MOD_NOREPEAT, 0x15); //Ctrl + Alt + í•œ/ì˜
+	RegisterHotKey(NULL, 3, MOD_SHIFT | MOD_NOREPEAT, 0x15); //Shift + í•œ/ì˜
+	RegisterHotKey(NULL, 4, MOD_SHIFT | MOD_ALT | MOD_NOREPEAT, 0x15); //Shift + Alt + í•œ/ì˜
 	
 
-	//´ÜÃàÅ° Ã³¸®
+	//ë‹¨ì¶•í‚¤ ì²˜ë¦¬
 	MSG msg = { 0 };
 	while (GetMessage(&msg, NULL, 0, 0) != 0)
 	{
 		if (msg.message == WM_HOTKEY)
 		{
-			if (msg.wParam == 1) //Ctrl + ÇÑ/¿µ
+			if (msg.wParam == 1) //Ctrl + í•œ/ì˜
 			{
 				ExecuteCtrlC();
 
@@ -135,7 +133,7 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 
 				ExecuteCtrlV();
 			}
-			else if (msg.wParam == 2) //Ctrl + Alt + ÇÑ/¿µ
+			else if (msg.wParam == 2) //Ctrl + Alt + í•œ/ì˜
 			{
 				char* clipboard_text = ClipboardManager::GetClipboardText();
 				if (clipboard_text == NULL) //check error
@@ -155,7 +153,7 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 					continue;
 				}
 			}
-			else if (msg.wParam == 3) //Shift + ÇÑ/¿µ
+			else if (msg.wParam == 3) //Shift + í•œ/ì˜
 			{
 				UpShift();
 				ExecuteCtrlC();
@@ -182,7 +180,7 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 
 				ExecuteCtrlV();
 			}
-			else if (msg.wParam == 4) //Shift + Alt + ÇÑ/¿µ
+			else if (msg.wParam == 4) //Shift + Alt + í•œ/ì˜
 			{
 				char* clipboard_text = ClipboardManager::GetClipboardText();
 				if (clipboard_text == NULL) //check error
@@ -206,7 +204,7 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 	}
 
 
-	//´ÜÃàÅ° ÇØÁ¦
+	//ë‹¨ì¶•í‚¤ í•´ì œ
 	UnregisterHotKey(NULL, 1);
 	UnregisterHotKey(NULL, 2);
 	UnregisterHotKey(NULL, 3);
