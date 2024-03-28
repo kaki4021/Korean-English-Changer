@@ -67,6 +67,7 @@ wchar_t* KoreanDecompositionManager::KoreanDecomposition(const wchar_t* p_korean
 				v_english_text.push_back(middle2.at(p_korean_text_value));
 			}
 		}
+		//한글 아님
 		else
 		{
 			v_english_text.push_back(p_korean_text_value);
@@ -74,7 +75,7 @@ wchar_t* KoreanDecompositionManager::KoreanDecomposition(const wchar_t* p_korean
 	}
 
 
-	//vector 에서 wchar_t로 변환
+	//vector에서 wchar_t로 변환
 	size_t v_english_text_size = v_english_text.size();
 	wchar_t* p_english_text = new wchar_t[v_english_text_size + 1];
 	for (size_t i = 0; i < v_english_text_size; i++)

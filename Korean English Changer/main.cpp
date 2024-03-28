@@ -77,7 +77,7 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 
 	//시작 프로그램 등록
 	{
-		wchar_t exePath[MAX_PATH] = { 0, };
+		wchar_t exePath[MAX_PATH] = { 0 };
 		GetModuleFileName(NULL, exePath, MAX_PATH);
 
 		HKEY hKey;
@@ -125,17 +125,13 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 				wchar_t* korean_char = KoreanMergeManager::KoreanMerge(w_clipboard_text);
 
 				int copy_korean_char_2_clipboard_result = ClipboardManager::CopyText2Clipboard(korean_char);
-				if (copy_korean_char_2_clipboard_result == -1) //check error
-				{
-					delete[] clipboard_text;
-					delete[] w_clipboard_text;
-					delete[] korean_char;
-					continue;
-				}
-
 				delete[] clipboard_text;
 				delete[] w_clipboard_text;
 				delete[] korean_char;
+				if (copy_korean_char_2_clipboard_result == -1) //check error
+				{
+					continue;
+				}
 
 				ExecuteCtrlV();
 			}
@@ -151,17 +147,13 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 				wchar_t* korean_char = KoreanMergeManager::KoreanMerge(w_clipboard_text);
 
 				int copy_korean_char_2_clipboard_result = ClipboardManager::CopyText2Clipboard(korean_char);
-				if (copy_korean_char_2_clipboard_result == -1) //check error
-				{
-					delete[] clipboard_text;
-					delete[] w_clipboard_text;
-					delete[] korean_char;
-					continue;
-				}
-
 				delete[] clipboard_text;
 				delete[] w_clipboard_text;
 				delete[] korean_char;
+				if (copy_korean_char_2_clipboard_result == -1) //check error
+				{
+					continue;
+				}
 			}
 			else if (msg.wParam == 3) //Shift + 한/영
 			{
@@ -180,17 +172,13 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 				wchar_t* english_char = KoreanDecompositionManager::KoreanDecomposition(w_clipboard_text);
 
 				int copy_english_char_2_clipboard_result = ClipboardManager::CopyText2Clipboard(english_char);
-				if (copy_english_char_2_clipboard_result == -1) //check error
-				{
-					delete[] clipboard_text;
-					delete[] w_clipboard_text;
-					delete[] english_char;
-					continue;
-				}
-
 				delete[] clipboard_text;
 				delete[] w_clipboard_text;
 				delete[] english_char;
+				if (copy_english_char_2_clipboard_result == -1) //check error
+				{
+					continue;
+				}
 
 				ExecuteCtrlV();
 			}
@@ -206,17 +194,13 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 				wchar_t* english_char = KoreanDecompositionManager::KoreanDecomposition(w_clipboard_text);
 
 				int copy_english_char_2_clipboard_result = ClipboardManager::CopyText2Clipboard(english_char);
-				if (copy_english_char_2_clipboard_result == -1) //check error
-				{
-					delete[] clipboard_text;
-					delete[] w_clipboard_text;
-					delete[] english_char;
-					continue;
-				}
-
 				delete[] clipboard_text;
 				delete[] w_clipboard_text;
 				delete[] english_char;
+				if (copy_english_char_2_clipboard_result == -1) //check error
+				{
+					continue;
+				}
 			}
 		}
 	}
