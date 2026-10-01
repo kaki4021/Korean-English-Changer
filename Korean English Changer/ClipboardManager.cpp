@@ -57,6 +57,55 @@ char* ClipboardManager::GetClipboardText()
 	return p_string;
 }
 
+// 1. 현재 클립보드 전체 백업 (이미지, 파일 등 모든 포맷)
+std::vector<ClipboardBackupItem> ClipboardManager::BackupClipboard() {
+	std::vector<ClipboardBackupItem> backupList;
+	if (!OpenClipboard(NULL)) return backupList;
+
+	UINT format = 0;
+	while ((format = EnumClipboardFormats(format)) != 0) {
+		HGLOBAL hClipboardData = GetClipboardData(format);
+		if (hClipboardData == NULL) continue;
+
+		void* pSource = GlobalLock(hClipboardData);
+		if (pSource == NULL) continue;
+
+		SIZE_T dataSize = GlobalSize(hClipboardData);
+		if (dataSize == 0) continue;
+
+		HGLOBAL hNewData = GlobalAlloc(GMEM_MOVEABLE, dataSize);
+		if (hNewData == NULL) continue;
+
+		void* pDest = GlobalLock(hNewData);
+		if (pDest != 0) {
+			memcpy(pDest, pSource, dataSize);
+		}
+		GlobalUnlock(hClipboardData);
+		GlobalUnlock(hNewData);
+
+		backupList.push_back({ format, hNewData });
+	}
+	CloseClipboard();
+	return backupList;
+}
+
+// 2. 백업된 데이터 원상복구
+void ClipboardManager::RestoreClipboard(const std::vector<ClipboardBackupItem>& backupList) {
+	if (backupList.empty()) return;
+	if (!OpenClipboard(NULL)) {
+		for (const auto& item : backupList) GlobalFree(item.hData);
+		return;
+	}
+
+	EmptyClipboard(); // 새 공간 확보
+	for (const auto& item : backupList) {
+		if (!SetClipboardData(item.format, item.hData)) {
+			GlobalFree(item.hData); // 실패 시에만 수동 해제
+		}
+	}
+	CloseClipboard();
+}
+
 char* ClipboardManager::Wchar2Char(const wchar_t* p_wchar_string)
 {
 	size_t converted_chars = 0;
