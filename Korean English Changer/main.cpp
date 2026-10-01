@@ -68,6 +68,8 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 		{
 			if (msg.wParam == 1) //Ctrl + 한/영
 			{
+				std::vector<ClipboardBackupItem> clipboardBackup = ClipboardManager::BackupClipboard();
+
 				if (!OpenClipboard(NULL))
 					continue;
 				EmptyClipboard();
@@ -93,6 +95,9 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 					continue;
 
 				ExecuteCtrlV();
+
+				Sleep(100);
+				ClipboardManager::RestoreClipboard(clipboardBackup);
 			}
 			else if (msg.wParam == 2) //Ctrl + Alt + 한/영
 			{
@@ -101,6 +106,8 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 			}
 			else if (msg.wParam == 3) //Shift + 한/영
 			{
+				std::vector<ClipboardBackupItem> clipboardBackup = ClipboardManager::BackupClipboard();
+
 				if (!OpenClipboard(NULL))
 					continue;
 				EmptyClipboard();
@@ -127,6 +134,8 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 					continue;
 
 				ExecuteCtrlV();
+
+				ClipboardManager::RestoreClipboard(clipboardBackup);
 			}
 			else if (msg.wParam == 4) //Shift + Alt + 한/영
 			{
