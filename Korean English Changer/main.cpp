@@ -135,6 +135,7 @@ WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ char*, _In_ int)
 
 				ExecuteCtrlV();
 
+				Sleep(100);
 				ClipboardManager::RestoreClipboard(clipboardBackup);
 			}
 			else if (msg.wParam == 4) //Shift + Alt + 한/영

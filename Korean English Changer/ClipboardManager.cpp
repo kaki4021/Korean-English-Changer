@@ -67,15 +67,17 @@ std::vector<ClipboardBackupItem> ClipboardManager::BackupClipboard() {
 		HGLOBAL hClipboardData = GetClipboardData(format);
 		if (hClipboardData == NULL) continue;
 
+		void* pSource = GlobalLock(hClipboardData);
+		if (pSource == NULL) continue;
+
 		SIZE_T dataSize = GlobalSize(hClipboardData);
 		if (dataSize == 0) continue;
 
 		HGLOBAL hNewData = GlobalAlloc(GMEM_MOVEABLE, dataSize);
 		if (hNewData == NULL) continue;
 
-		void* pSource = GlobalLock(hClipboardData);
 		void* pDest = GlobalLock(hNewData);
-		if (pSource && pDest) {
+		if (pDest != 0) {
 			memcpy(pDest, pSource, dataSize);
 		}
 		GlobalUnlock(hClipboardData);
